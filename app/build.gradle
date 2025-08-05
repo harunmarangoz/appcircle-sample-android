@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    buildFeatures {
+        buildConfig = true
+    }
+    compileSdkVersion 33
+    namespace 'com.example.appcircle_sample_android'
+    buildToolsVersion "33.0.0"
+
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+        applicationId "com.appcircle.appcircle_sample_android"
+        minSdkVersion 21
+        targetSdkVersion 33
+        
+        if (System.getenv("AC_APPCIRCLE")) {
+            def buildNumber = System.getenv("AC_BUILD_NUMBER")
+            versionName = "1.0." + buildNumber
+            versionCode = Integer.valueOf(buildNumber)
+        } else {
+            versionCode 2
+            versionName "1.0.1"
+        }
+        
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "APPCIRCLE_API_URL", "\"${System.env.AC_API_URL}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
