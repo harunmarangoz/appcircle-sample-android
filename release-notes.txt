@@ -1,0 +1,8 @@
+Branch: main
+Commit Hash: 1b6179c
+Commit Message: Update README.md
+Trigger Type: User
+Trigger User: harun@appcircle.io
+Git Tag: 
+Build Configuration: Default Configuration
+Build Workflow: Default Push Workflow
